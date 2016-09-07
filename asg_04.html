@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="acadgild">
+	<head>
+		<title>Assignment 16.4</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script>
+			var myapp = angular.module('acadgild', []);
+
+			myapp.service('empDetails', function() {
+				this.employees = [{name : "Garima Agarwal", designation: "Developer"},
+						{name: "Rishi Agrawal", designation: "Manager"}];
+
+				this.printDetail = function() {
+					return this.employees;
+				}
+				
+			});
+
+			myapp.controller('mycontroller1', function($scope, empDetails) {
+				$scope.users = [];
+				$scope.GetUsers = function() {
+					$scope.users = empDetails.printDetail();
+				}
+			});
+
+
+		</script>
+	</head>
+	<body>
+		<div ng-controller="mycontroller1" ng-init="GetUsers()">
+			<table border="1">
+				<tr ng-repeat="n in users">
+					<td>{{n.name}}</td>
+					<td>{{n.designation}}</td>
+				</tr>
+			</table>
+		</div>
+
+	</body>
+</html>
